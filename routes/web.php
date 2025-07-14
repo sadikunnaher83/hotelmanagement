@@ -16,6 +16,7 @@ Route::post('addroom', [BackendController::class, 'addroom']);
 Route::get('viewroom', [BackendController::class, 'viewroom'])->name('viewroom');
 Route::get('roomdelete/{id}', [BackendController::class, 'roomdelete']);
 
-Route::get('/roomupdate/{id}', [BackendController::class, 'roomupdate']); // ফর্ম দেখানোর জন্য
-Route::put('/roomupdate/{id}', [BackendController::class, 'roomupdateSubmit']); // ফর্ম সাবমিট হ্যান্ডেল করার জন্য
+Route::get('/roomupdate/{id}', [BackendController::class, 'roomupdate']);
+Route::put('/roomupdate/{id}', [BackendController::class, 'roomupdateSubmit']);
+Route::get('/roomdetails/{id}', [FrontendController::class, 'roomdetails']);
 
