@@ -24,7 +24,8 @@
       <!-- end header inner -->
 
 <div class="row" style="display: flex; justify-content: center;">
-    <div class="col-md-4 col-sm-6" style="border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin: 10px; box-shadow: 2px 2px 10px rgba(216, 9, 199, 0.1);">
+
+    <div class="col-md-4 col-sm-6" style="border: 2px solid #d116d4;; padding: 15px; margin: 10px; box-shadow: 2px 2px 10px rgba(216, 9, 199, 0.1);">
         <div class="room">
             <div class="room_img" style="width: 100%; height: 250px; overflow: hidden; border-radius: 8px;">
                 <img src="{{ asset('uploads/room/' . $room->image) }}"
@@ -40,15 +41,75 @@
             </div>
         </div>
     </div>
+
+<div class="div-md-4 col-sm-6">
+
+     <div class="div-md-4 col-sm-6">
+      <h2 style="color: purple;">Book Room</h2>
+
+        @if($errors)
+            @foreach ($errors->all() as $errors )
+                <li style="color: red;">{{ $errors }}</li>
+            @endforeach
+        @endif
+
+                <form action="{{ url('addbooking', $room->id) }}" method="POST">
+                @csrf
+                <div class="div">
+                    <label for="">Name</label>
+                    <input type="text" name="name">
+                </div>
+                <div class="div">
+                    <label for="">Email</label>
+                    <input type="email" name="email">
+                </div>
+                <div class="div">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone">
+                </div>
+                <div class="div">
+                    <label for="">Start Date</label>
+                    <input type="date" name="startDate" id="startDate">
+                </div>
+                <div class="div">
+                    <label for="">End Date</label>
+                    <input type="date" name="endDate" id="endDate">
+                </div>
+                <div class="div">
+                    <input type="submit" class="btn btn-success" value="Book room">
+                </div>
+            </form>
+            </div>
+
 </div>
 
 
-
-
+</div>
 
       <!--  footer -->
       @include('home.footer')
       <!-- end footer -->
+
+      <script type="text/javascript">
+      $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getfullYear();
+
+        if (month < 10)
+          month = '0' + month.toString();
+        if (day < 10)
+          day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        document.getElementById('startDate').setAttribute('min', maxDate);
+        document.getElementById('endDate').setAttribute('min', maxDate);
+
+      });
+
+
+      </script>
 
       <!-- Javascript files-->
       <script src="{{asset('assets/js/jquery.min.js')}}"></script>
