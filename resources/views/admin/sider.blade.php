@@ -20,9 +20,13 @@
                     <li><a href="{{ route('admin.createroom') }}">Add Rooms</a></li>
 
                     <li><a href="{{ url('viewroom') }}">View Rooms</a></li>
-                    <li><a href="#">Page</a></li>
+
                   </ul>
                 </li>
+               <li>
+                <a href="{{ url('bookings') }}"> <i class="icon-home"></i>Bookings</a>
+               </li>
+
         </ul>
 
       </nav>

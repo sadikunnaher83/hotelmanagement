@@ -18,6 +18,11 @@ Route::get('roomdelete/{id}', [BackendController::class, 'roomdelete']);
 
 Route::get('/roomupdate/{id}', [BackendController::class, 'roomupdate']);
 Route::put('/roomupdate/{id}', [BackendController::class, 'roomupdateSubmit']);
+Route::get('/bookings', [BackendController::class, 'bookings']);
+
+
+
 Route::get('/roomdetails/{id}', [FrontendController::class, 'roomdetails']);
 Route::post('/addbooking/{id}', [FrontendController::class, 'addbooking']);
+
 

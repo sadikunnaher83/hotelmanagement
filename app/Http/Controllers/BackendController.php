@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Room;
+use App\Models\Booking;
 
 class BackendController extends Controller
 {
@@ -97,5 +98,10 @@ public function roomupdateSubmit(Request $request, $id)
     return redirect()->route('viewroom')->with('message', 'Room updated successfully');
 }
 
+    public function bookings()
+    {
+        $bookings = Booking::paginate(6);
+        return view('admin.bookings', compact('bookings'));
+    }
 
 }

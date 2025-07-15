@@ -71,4 +71,6 @@ public function addbooking(Request $request, $id)
         return redirect()->back()->with('message', 'Room Booked Successfully');
     }
 
+
+
 }
