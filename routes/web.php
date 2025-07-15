@@ -20,6 +20,8 @@ Route::get('/roomupdate/{id}', [BackendController::class, 'roomupdate']);
 Route::put('/roomupdate/{id}', [BackendController::class, 'roomupdateSubmit']);
 Route::get('/bookings', [BackendController::class, 'bookings']);
 Route::get('/bookingdelete/{id}', [BackendController::class, 'bookingdelete']);
+Route::get('/approvebook/{id}', [BackendController::class, 'approvebook']);
+Route::get('/rejected/{id}', [BackendController::class, 'rejected']);
 
 
 

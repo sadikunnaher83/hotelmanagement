@@ -106,13 +106,27 @@ public function roomupdateSubmit(Request $request, $id)
 
     public function bookingdelete($id)
     {
-        // $booking = Booking::find($id);
-        // $booking->delete();
-        // return redirect()->back()->with('message', 'Booking deleted successfully');
-
         $booking = Booking::findOrFail($id);
         $booking->delete();
         return redirect()->back()->with('message', 'Booking deleted successfully');
     }
+
+   public function approvebook($id)
+   {
+       $booking = Booking::findOrFail($id);
+       $booking->status = 'Approved';
+       $booking->save();
+
+    return redirect()->back()->with('message', 'Booking approved successfully');
+   }
+
+   public function rejected($id)
+   {
+       $booking = Booking::findOrFail($id);
+       $booking->status = 'Rejected';
+       $booking->save();
+
+    return redirect()->back()->with('message', 'Booking rejected successfully');
+   }
 
 }
