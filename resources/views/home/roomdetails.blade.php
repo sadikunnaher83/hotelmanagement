@@ -47,6 +47,12 @@
      <div class="div-md-4 col-sm-6">
       <h2 style="color: purple;">Book Room</h2>
 
+      @if(session()->has('message'))
+      <div class="alert alert-success">
+         {{ session()->get('message') }}
+      </div>
+      @endif
+
         @if($errors)
             @foreach ($errors->all() as $errors )
                 <li style="color: red;">{{ $errors }}</li>

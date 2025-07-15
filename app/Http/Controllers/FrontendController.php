@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Booking;
@@ -22,25 +23,52 @@ class FrontendController extends Controller
     public function roomdetails($id)
     {
 
-        $room = Room::find($id);
-        return view('home.roomdetails', compact('room'));
+       $room = Room::findOrFail($id);
+
+        $bookings = Booking::where('room_id', $id)
+            ->orderBy('startDate', 'asc')
+            ->get();
+
+        return view('home.roomdetails', compact('room', 'bookings'));
     }
 
-    public function addbooking(Request $request, $id)
+public function addbooking(Request $request, $id)
     {
         $request->validate([
             'startDate' => 'required|date',
-            'endDate' => 'date|after:startDate',
+            'endDate' => 'required|date|after:startDate',
         ]);
-        $booking = new Booking;
-        $booking->room_id = $id;
-        $booking->name = $request->name;
-        $booking->email = $request->email;
-        $booking->phone = $request->phone;
-        $booking->startDate = $request->startDate;
-        $booking->endDate = $request->endDate;
-        $booking->save();
-        return redirect()->back();
 
+        $data = new Booking();
+        $data->room_id = $id;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+
+        $isBooked = Booking::where('room_id', $id)
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('startDate', [$startDate, $endDate])
+                    ->orWhereBetween('endDate', [$startDate, $endDate])
+                    ->orWhere(function ($q) use ($startDate, $endDate) {
+                        $q->where('startDate', '<=', $startDate)
+                            ->where('endDate', '>=', $endDate);
+                    });
+            })
+            ->exists();
+
+        if ($isBooked) {
+            return redirect()->back()->with('message', 'Room already Booked');
+        }
+
+
+        $data->startDate = $startDate;
+        $data->endDate = $endDate;
+        $data->save();
+
+        return redirect()->back()->with('message', 'Room Booked Successfully');
     }
+
 }
