@@ -1,55 +1,26 @@
- <!-- gallery -->
-      <div  class="gallery">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>gallery</h2>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery1.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery2.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery3.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery4.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery5.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery6.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery7.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6">
-                  <div class="gallery_img">
-                     <figure><img src="{{asset('assets/images/gallery8.jpg')}}" alt="#"/></figure>
-                  </div>
-               </div>
+<!-- gallery -->
+<div class="gallery">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>Gallery</h2>
             </div>
          </div>
       </div>
-      <!-- end gallery -->
+
+      {{-- শুরুতে একটিই row নাও --}}
+      <div class="row">
+         @foreach ($gallaries as $gallary)
+            <div class="col-md-3 col-sm-6 mb-4">
+               <div class="gallery_img">
+                  <figure>
+                     <img src="{{ asset('uploads/gallary/' . $gallary->image) }}" alt="Gallery Image">
+                  </figure>
+               </div>
+            </div>
+         @endforeach
+      </div>
+   </div>
+</div>
+<!-- end gallery -->

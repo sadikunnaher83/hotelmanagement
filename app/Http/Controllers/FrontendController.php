@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Booking;
+use App\Models\Gallary;
 class FrontendController extends Controller
 {
     /**
@@ -17,7 +18,8 @@ class FrontendController extends Controller
     public function index()
     {
         $room = Room::all();
-        return view('home.index', compact('room'));
+        $gallaries = Gallary::all();
+        return view('home.index', compact('room', 'gallaries'));
     }
 
     public function roomdetails($id)
