@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\Booking;
+use App\Models\Gallary;
 
 class BackendController extends Controller
 {
@@ -129,4 +130,34 @@ public function roomupdateSubmit(Request $request, $id)
     return redirect()->back()->with('message', 'Booking rejected successfully');
    }
 
+   public function viewgalary()
+   {
+    $gallaries = Gallary::all();
+    return view('admin.viewgalary', compact('gallaries'));
+
+    }
+
+    public function uploadgalary(Request $request)
+    {
+        $gallaries = new Gallary();
+$image = $request->image;
+
+if($image)
+{
+    $imagename = time().'.'.$image->getClientOriginalExtension();
+    $image->move('uploads/gallary', $imagename);
+    $gallaries->image = $imagename;
+    $gallaries->save();
+
+    return redirect()->back()->with('message', 'Image uploaded successfully!');
+}
+
+    }
+
+    public function deletegallary($id)
+    {
+        $gallaries = Gallary::findOrFail($id);
+        $gallaries->delete();
+        return redirect()->back();
+    }
 }

@@ -26,6 +26,9 @@
                <li>
                 <a href="{{ url('bookings') }}"> <i class="icon-home"></i>Bookings</a>
                </li>
+               <li>
+                <a href="{{ url('viewgalary') }}"> <i class="icon-home"></i>Galary</a>
+               </li>
 
         </ul>
 

@@ -22,6 +22,9 @@ Route::get('/bookings', [BackendController::class, 'bookings']);
 Route::get('/bookingdelete/{id}', [BackendController::class, 'bookingdelete']);
 Route::get('/approvebook/{id}', [BackendController::class, 'approvebook']);
 Route::get('/rejected/{id}', [BackendController::class, 'rejected']);
+Route::get('/viewgalary', [BackendController::class, 'viewgalary']);
+Route::post('/uploadgalary', [BackendController::class, 'uploadgalary']);
+Route::get('/deletegallary/{id}', [BackendController::class, 'deletegallary']);
 
 
 
