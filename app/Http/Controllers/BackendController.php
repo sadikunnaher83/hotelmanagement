@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\Booking;
 use App\Models\Gallary;
+use App\Models\Contact;
+use App\Notifications\SendEmailNotification;
+use Notification;
+
 
 class BackendController extends Controller
 {
@@ -140,7 +144,7 @@ public function roomupdateSubmit(Request $request, $id)
     public function uploadgalary(Request $request)
     {
         $gallaries = new Gallary();
-$image = $request->image;
+        $image = $request->image;
 
 if($image)
 {
@@ -160,4 +164,35 @@ if($image)
         $gallaries->delete();
         return redirect()->back();
     }
+
+    public function allmessages()
+    {
+        $messages = Contact::all();
+        return view('admin.allmessage', compact('messages'));
+    }
+
+    public function sendmail($id)
+    {
+        $message = Contact::findOrFail($id);
+        return view('admin.sendmail', compact('message'));
+    }
+
+public function mail(Request $request, $id)
+{
+    $contact = Contact::findOrFail($id);
+
+    $details = [
+        'greeting' => $request->greeting,
+        'body' => $request->body,
+        'actionText' => $request->action_text,
+        'actionURL' => $request->action_url,
+        'endText' => $request->end_part,
+    ];
+
+    Notification::route('mail', $contact->email)
+        ->notify(new SendEmailNotification($details));
+
+    return redirect()->back()->with('message', 'Mail sent successfully!');
+}
+
 }

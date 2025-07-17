@@ -25,10 +25,21 @@ Route::get('/rejected/{id}', [BackendController::class, 'rejected']);
 Route::get('/viewgalary', [BackendController::class, 'viewgalary']);
 Route::post('/uploadgalary', [BackendController::class, 'uploadgalary']);
 Route::get('/deletegallary/{id}', [BackendController::class, 'deletegallary']);
+Route::get('/allmessages', [BackendController::class, 'allmessages']);
+Route::get('/sendmail/{id}', [BackendController::class, 'sendmail']);
+Route::get('/mail/{id}', [BackendController::class, 'mail']);
 
 
 
 Route::get('/roomdetails/{id}', [FrontendController::class, 'roomdetails']);
 Route::post('/addbooking/{id}', [FrontendController::class, 'addbooking']);
+Route::post('/contact', [FrontendController::class, 'contact']);
+
+Route::get('/ourrooms', [FrontendController::class, 'ourroom']);
+Route::get('/hotelgallery', [FrontendController::class, 'hotelgallery']);
+Route::get('/ourabout', [FrontendController::class, 'ourabout']);
+Route::get('/ourblogs', [FrontendController::class, 'ourblogs']);
+Route::get('/ourcontacts', [FrontendController::class, 'ourcontact']);
+
 
 

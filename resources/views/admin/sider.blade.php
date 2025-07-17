@@ -29,6 +29,9 @@
                <li>
                 <a href="{{ url('viewgalary') }}"> <i class="icon-home"></i>Galary</a>
                </li>
+               <li>
+                <a href="{{ url('allmessages') }}"> <i class="icon-home"></i>Message</a>
+               </li>
 
         </ul>
 

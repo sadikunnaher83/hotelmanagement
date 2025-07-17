@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Gallary;
+use App\Models\Contact;
 class FrontendController extends Controller
 {
     /**
@@ -73,6 +74,42 @@ public function addbooking(Request $request, $id)
         return redirect()->back()->with('message', 'Room Booked Successfully');
     }
 
+    public function contact(Request $request)
+    {
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('message', 'Message Send Successfully');
+    }
 
+    public function ourroom()
+    {
+        $room = Room::all();
+        return view('home.ourroom', compact('room'));
+    }
 
+    public function hotelgallery()
+    {
+        $gallaries = Gallary::all();
+        return view('home.hotelgallery', compact('gallaries'));
+    }
+
+    public function ourabout()
+    {
+        return view('home.ourabout');
+    }
+
+    public function ourblogs()
+    {
+        return view('home.ourblogs');
+    }
+
+    public function ourcontact()
+    {
+        return view('home.ourcontacts');
+    }
 }
+
