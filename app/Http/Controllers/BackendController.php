@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Room;
-use App\Models\Booking;
-use App\Models\Gallary;
-use App\Models\Contact;
-use App\Notifications\SendEmailNotification;
 use Notification;
+use App\Models\Room;
+use App\Models\User;
+use App\Models\Booking;
+use App\Models\Contact;
+use App\Models\Gallary;
+use App\Mail\BookingMail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\SendEmailNotification;
+use Notifiable;
 
 
 class BackendController extends Controller
@@ -73,14 +76,14 @@ class BackendController extends Controller
     }
 
 
-// ফর্ম দেখানোর জন্য
+
 public function roomupdate($id)
 {
-    $room = Room::findOrFail($id);  // ডেটা নিয়ে আসা
-    return view('admin.roomupdate', compact('room'));  // view তে পাঠানো
+    $room = Room::findOrFail($id);
+    return view('admin.roomupdate', compact('room'));
 }
 
-// ফর্ম সাবমিট করার জন্য
+
 public function roomupdateSubmit(Request $request, $id)
 {
     $room = Room::findOrFail($id);
@@ -165,11 +168,19 @@ if($image)
         return redirect()->back();
     }
 
+    // public function allmessages()
+    // {
+    //     $messages = Contact::all();
+    //     return view('admin.allmessage', compact('messages'));
+    // }
+
     public function allmessages()
-    {
-        $messages = Contact::all();
-        return view('admin.allmessage', compact('messages'));
-    }
+{
+    $messages = Contact::paginate(4);
+
+    return view('admin.allmessage', compact('messages'));
+}
+
 
     public function sendmail($id)
     {
@@ -179,20 +190,19 @@ if($image)
 
 public function mail(Request $request, $id)
 {
-    $contact = Contact::findOrFail($id);
+    $message = Contact::find($id);
 
     $details = [
         'greeting' => $request->greeting,
         'body' => $request->body,
-        'actionText' => $request->action_text,
-        'actionURL' => $request->action_url,
-        'endText' => $request->end_part,
+        'actiontext' => $request->actiontext,
+        'actionturl' => $request->actionturl,
+        'endline' => $request->endline,
     ];
 
-    Notification::route('mail', $contact->email)
-        ->notify(new SendEmailNotification($details));
+    Notification::send($message, new SendEmailNotification($details));
+    return redirect()->back()->with('message', 'Email sent successfully');
 
-    return redirect()->back()->with('message', 'Mail sent successfully!');
 }
 
 }

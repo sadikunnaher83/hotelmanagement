@@ -46,11 +46,18 @@
                         <td>
                             <a class="btn btn-success" href="{{ url('/sendmail', $message->id) }}">Send mail</a>
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-end mt-4">
+            {{  $messages->links() }}
+          </div>
+
     </div>
 </div>
 

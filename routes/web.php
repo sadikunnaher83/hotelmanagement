@@ -4,12 +4,13 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-Route::get('/home', [FrontendController::class, 'index'])->name('home');
+// Route::get('/home', [FrontendController::class, 'index'])->name('home');
+ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('backend', [BackendController::class, 'index'])->name('admin');
 Route::get('createroom', [BackendController::class, 'createroom'])->name('admin.createroom');
 Route::post('addroom', [BackendController::class, 'addroom']);
@@ -27,7 +28,7 @@ Route::post('/uploadgalary', [BackendController::class, 'uploadgalary']);
 Route::get('/deletegallary/{id}', [BackendController::class, 'deletegallary']);
 Route::get('/allmessages', [BackendController::class, 'allmessages']);
 Route::get('/sendmail/{id}', [BackendController::class, 'sendmail']);
-Route::get('/mail/{id}', [BackendController::class, 'mail']);
+Route::post('/mail/{id}', [BackendController::class, 'mail']);
 
 
 
