@@ -38,7 +38,7 @@ class BookingMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.booking_mail', // এখানে তোমার blade ফাইলের নাম
+            view: 'emails.booking_mail',
         );
     }
 
